@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{%  load bootstrap_tags %}
+
+{% block page_title %}{{ user }}'s Profile{% endblock %}
+
+{% block content %}
+<div class="pt-5 container pb-5">
+    <h3 class="py-3 text-uppercase font-weight-bold heading-orange"></h3>
+    
+    <!-- order history table -->
+    <div class="row">
+        <table class="table table-responsive-xs table-responsive-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Booking date </th>
+                    <th scope="col">Vehicle</th>
+                    <th scope="col">Rental dates</th>
+                    <th scope="col">Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in orders %}
+                <tr>
+                    <th class="bg-light shopping-hist" scope="row">{{item.order_date|date:"D d M Y"}}
+                    </th>
+                    <td class="bg-light shopping-hist py-2">
+                        <figure">
+                            <figcaption class="font-weight-bold mx-5 pb-2">{{ item.vehicle_model }}</figcaption>
+                            <img class="image-hist img-thumbnail" src="{{ MEDIA_URL }}{{ item.vehicle_image }}"
+                                alt="vehicle image">
+                            </figure>
+                    </td>
+                    <td class="font-weight-bold bg-light shopping-hist">{{ item.from_date|date:"D d M Y" }} - {{ item.to_date|date:"D d M Y" }} ({{item.days}} days)</td>
+                    <td class="font-weight-bold bg-light shopping-hist">
+                        <p>$ {{ item.subtotal }}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!--end row-->
+</div><!--end container-->
+
+{% endblock %}

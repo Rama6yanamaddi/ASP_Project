@@ -1,0 +1,25 @@
+{% extends 'myfinances/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}User Login{% endblock %}
+
+{% block content %}
+<div class="px-3 pt-5 pb-5 form-bg">
+    <h4 class="heading-orange pt-5 text-center font-weight-bold mb-3">Sign in to your account</h4>
+    <p class="text-center">Please login to checkout.</p>
+    <p class="text-center">Don't have an account yet? Register <a href="{% url 'registration' %}">here.</a></p>
+    
+    <!--login form-->
+    <form method="POST">
+        {% csrf_token %}
+        {{ login_form | crispy }}
+        <div class="row  d-flex justify-content-center ">
+            <button type="submit" class="btn btn-orange">Login</button>
+        </div>
+    </form>
+
+    <!-- reset password link-->
+    <p><a href="{% url 'login' %}">Forgot the password?</a></p> 
+</div>
+{% endblock %}

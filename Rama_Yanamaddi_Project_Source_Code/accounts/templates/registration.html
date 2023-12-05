@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Sign Up page{% endblock %}
+
+
+{% block content %}
+<div class="px-3 pt-3 pb-5 form-bg">
+    <!--info and link for user to login if already registered-->
+    <h4 class="heading-orange text-center font-weight-bold pt-5 mb-3">Sing up with your email address </h4>
+    <p class="pb-2 text-center">If you already have an account, you can <a href="{% url 'login' %}">Login</a></p>
+    
+    <!-- registration form -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ registration_form | crispy }}
+        <div class="row d-flex justify-content-center">
+        <!-- sign up button - submit form -->
+        <button type="submit" class="btn btn-orange">Sign up</button>
+    </div>
+    </form>
+</div>
+{% endblock %}
